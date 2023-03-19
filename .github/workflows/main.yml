@@ -19,7 +19,7 @@ jobs:
           node-version: 18.x
           cache: 'pnpm'
       - name: Setup pnpm
-        run: npm i -g pnpm@latest    
+        run: npm install -g pnpm
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
   lint:
