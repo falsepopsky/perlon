@@ -8,58 +8,35 @@ on:
       - main
 
 jobs:
-  lint:
+  shared:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v2
-        with:
-          version: 7.29.3
       - name: Setup Node js
         uses: actions/setup-node@v3
         with:
           node-version: 18.x
           cache: 'pnpm'
+      - name: Setup pnpm
+        run: npm i -g pnpm@latest    
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
+  lint:
+    runs-on: ubuntu-latest
+    needs: shared
+    steps:
       - name: run lint
         run: pnpm lint
   test:
     runs-on: ubuntu-latest
+    needs: shared
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v2
-        with:
-          version: 7.29.3
-      - name: Setup Node js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 18.x
-          cache: 'pnpm'
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
       - name: run tests
         run: pnpm test
   build:
     runs-on: ubuntu-latest
-    needs: [lint, test]
+    needs: [shared, lint, test]
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v2
-        with:
-          version: 7.29.3
-      - name: Setup Node js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 18.x
-          cache: 'pnpm'
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
       - name: run build
         run: pnpm build
