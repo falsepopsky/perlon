@@ -1,10 +1,11 @@
 import { describe, expect, it } from '@jest/globals';
-import { greetings } from './index.js';
+import { packageName } from './index.js';
 
 describe('greetings', () => {
-  it('should say hello', () => {
-    const result = greetings();
+  it('should say perlon!', () => {
+    const name = packageName();
 
-    expect(result).toBe('hello world !');
+    expect(name).toBe('perlon');
+    expect(name).not.toBe('perla');
   });
 });

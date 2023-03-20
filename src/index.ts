@@ -1,3 +1,3 @@
-export const greetings = (): string => {
-  return 'hello world !';
+export const packageName = (): string => {
+  return 'perlon';
 };
