@@ -1,3 +1,3 @@
-# Typescript ESM template
+# perlon
 
 Personal Typescript ESM template
