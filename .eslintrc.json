@@ -2,10 +2,9 @@
   "root": true,
   "env": {
     "es2022": true,
-    "node": true,
-    "jest": true
+    "node": true
   },
-  "plugins": ["@typescript-eslint", "promise", "jest"],
+  "plugins": ["@typescript-eslint", "promise"],
   "extends": [
     "eslint:recommended",
     "plugin:@typescript-eslint/eslint-recommended",
@@ -16,7 +15,6 @@
     "plugin:import/typescript",
     "plugin:n/recommended",
     "plugin:promise/recommended",
-    "plugin:jest/recommended",
     "prettier"
   ],
   "parser": "@typescript-eslint/parser",
@@ -24,14 +22,6 @@
     "ecmaVersion": "latest",
     "sourceType": "module",
     "project": "tsconfig.json"
-  },
-  "rules": {
-    "jest/no-disabled-tests": "warn",
-    "jest/no-focused-tests": "error",
-    "jest/no-identical-title": "error",
-    "jest/prefer-to-have-length": "warn",
-    "jest/valid-expect": "error",
-    "import/no-unresolved": "error"
   },
   "settings": {
     "import/parsers": {
@@ -44,5 +34,21 @@
       }
     }
   },
+  "overrides": [
+    {
+      "plugins": ["jest"],
+      "env": { "jest": true },
+      "files": ["**/*.test.ts", "**/*.spec.ts"],
+      "extends": ["plugin:jest/recommended"],
+      "rules": {
+        "jest/no-disabled-tests": "warn",
+        "jest/no-focused-tests": "error",
+        "jest/no-identical-title": "error",
+        "jest/prefer-to-have-length": "warn",
+        "jest/valid-expect": "error",
+        "import/no-unresolved": "error"
+      }
+    }
+  ],
   "ignorePatterns": ["/*", "!/src"]
 }
