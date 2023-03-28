@@ -9,13 +9,25 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: pnpm/action-setup@v2
-        with:
-          version: 7.29.3
       - uses: actions/setup-node@v3
         with:
           node-version: 18.x
           cache: 'pnpm'
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 7.29.3
+      - name: Get pnpm store directory
+        id: pnpm-cache
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+      - uses: actions/cache@v3
+        name: Setup pnpm cache
+        with:
+          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
       - name: run lint
@@ -24,15 +36,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: pnpm/action-setup@v2
-        with:
-          version: 7.29.3
       - uses: actions/setup-node@v3
         with:
           node-version: 18.x
           cache: 'pnpm'
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 7.29.3
+      - name: Cache PNPM dependencies
+        uses: actions/cache@v3
+        id: pnpm-cache
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
       - name: run tests
         run: pnpm test
   build:
@@ -40,14 +56,18 @@ jobs:
     needs: [lint, test]
     steps:
       - uses: actions/checkout@v3
-      - uses: pnpm/action-setup@v2
-        with:
-          version: 7.29.3
       - uses: actions/setup-node@v3
         with:
           node-version: 18.x
           cache: 'pnpm'
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 7.29.3
+      - name: Cache PNPM dependencies
+        uses: actions/cache@v3
+        id: pnpm-cache
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
       - name: run build
         run: pnpm build
