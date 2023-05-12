@@ -1,6 +1,6 @@
 {
   "extends": "./tsconfig.json",
-  "compilerOptions": { "removeComments": true, "noEmit": false },
+  "compilerOptions": { "noEmit": false },
   "include": ["src"],
   "exclude": ["node_modules", "**/*.test.ts", "**/*.spec.ts"]
 }

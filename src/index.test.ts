@@ -1,7 +1,7 @@
 import { packageName } from './index.js';
 
-describe('greetings', () => {
-  it('should say perlon!', () => {
+describe('packageName', () => {
+  it('should say perlon', () => {
     const name = packageName();
 
     expect(name).toBe('perlon');
