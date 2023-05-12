@@ -3,17 +3,18 @@ import { createContext } from './index.js';
 describe('context function', () => {
   const context = createContext({ monster: 'Black Magician' });
 
-  test('Creates an object with monster property', () => {
+  it('should return Black magician monster', () => {
     const name = context.getState();
 
     expect(name.monster).toBe('Black Magician');
-    expect(name).not.toBe('perla');
+    expect(name).not.toBe('Blue Eyes White Dragon');
   });
 
-  test('Mutates the monster object', () => {
+  it('should change the name monster', () => {
     context.setState({ monster: 'Blue Eyes White Dragon' });
     const name = context.getState();
+
     expect(name.monster).toBe('Blue Eyes White Dragon');
-    expect(name).not.toBe('Black Magician');
+    expect(name.monster).not.toBe('Black Magician');
   });
 });
