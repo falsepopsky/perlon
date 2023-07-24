@@ -1,4 +1,4 @@
-import { createContext } from './index.js';
+import { createContext } from '../src/index.js';
 
 describe('context function', () => {
   const context = createContext({ monster: 'Black Magician' });

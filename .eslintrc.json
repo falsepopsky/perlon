@@ -7,9 +7,8 @@
   "plugins": ["@typescript-eslint", "promise"],
   "extends": [
     "eslint:recommended",
-    "plugin:@typescript-eslint/recommended",
-    "plugin:@typescript-eslint/recommended-requiring-type-checking",
-    "plugin:@typescript-eslint/strict",
+    "plugin:@typescript-eslint/strict-type-checked",
+    "plugin:@typescript-eslint/stylistic-type-checked",
     "plugin:import/recommended",
     "plugin:import/typescript",
     "plugin:n/recommended",
@@ -96,5 +95,5 @@
     "@typescript-eslint/strict-boolean-expressions": "error",
     "@typescript-eslint/no-import-type-side-effects": "error"
   },
-  "ignorePatterns": ["/*", "!/src"]
+  "ignorePatterns": ["/*", "!/src", "!/tests"]
 }
