@@ -1,4 +1,4 @@
-import { packageName } from './index.js';
+import { packageName } from '../src/index.js';
 
 describe('packageName', () => {
   it('should say perlon', () => {
