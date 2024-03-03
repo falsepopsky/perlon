@@ -1,6 +1,4 @@
-export const createContext = <T>(
-  initialState: T
-): { getState: () => T; setState: (newState: T) => void } => {
+export const createContext = <T>(initialState: T): { getState: () => T; setState: (newState: T) => void } => {
   let state = initialState;
 
   const getState = (): T => state;
