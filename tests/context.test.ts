@@ -1,3 +1,4 @@
+import { describe, expect, it } from 'vitest';
 import { createContext } from '../src/index.js';
 
 describe('context function', () => {
