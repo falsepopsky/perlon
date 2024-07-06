@@ -7,27 +7,22 @@ on:
     branches:
       - main
 
-env:
-  PNPM_VERSION: 8.15.4
-
 jobs:
   lint:
     name: ⬣ Lint
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v4.1.1
+        uses: actions/checkout@v4.1.7
       - name: Setup pnpm
-        uses: pnpm/action-setup@v3.0.0
-        with:
-          version: ${{ env.PNPM_VERSION }}
+        uses: pnpm/action-setup@v4
       - name: Setup Node
         uses: actions/setup-node@v4.0.2
         with:
           node-version-file: ".nvmrc"
           cache: pnpm
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: pnpm install
       - name: Run lint
         run: pnpm lint
   test:
@@ -35,18 +30,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v4.1.1
+        uses: actions/checkout@v4.1.7
       - name: Setup pnpm
-        uses: pnpm/action-setup@v3.0.0
-        with:
-          version: ${{ env.PNPM_VERSION }}
+        uses: pnpm/action-setup@v4
       - name: Setup Node
         uses: actions/setup-node@v4.0.2
         with:
           node-version-file: ".nvmrc"
           cache: pnpm
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: pnpm install
       - name: Run tests
         run: pnpm test
   build:
@@ -55,17 +48,15 @@ jobs:
     needs: [lint, test]
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v4.1.1
+        uses: actions/checkout@v4.1.7
       - name: Setup pnpm
-        uses: pnpm/action-setup@v3.0.0
-        with:
-          version: ${{ env.PNPM_VERSION }}
+        uses: pnpm/action-setup@v4
       - name: Setup Node
         uses: actions/setup-node@v4.0.2
         with:
           node-version-file: ".nvmrc"
           cache: pnpm
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: pnpm install
       - name: Run build
         run: pnpm build
