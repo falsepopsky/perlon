@@ -20,6 +20,6 @@
     "lib": ["es2023"],
     "verbatimModuleSyntax": true
   },
-  "include": ["src", "tests"],
+  "include": ["src", "tests", "eslint.config.js"],
   "exclude": ["node_modules"]
 }
